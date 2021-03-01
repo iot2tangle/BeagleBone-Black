@@ -1,7 +1,7 @@
 CC=gcc
 CFLAGS= -lcurl -lm -I. -DRASPI -DSHELLPRINT -DHTTP
-DEPS = core/raspi3-4/basics.h core/raspi3-4/protocols/http/http.h
-OBJ = core/raspi3-4/basics.o core/raspi3-4/protocols/http/http.o main.o
+DEPS = core/raspi3-4/basics.h core/raspi3-4/sensors/internal/internal.h core/raspi3-4/protocols/http/http.h
+OBJ = core/raspi3-4/basics.o core/raspi3-4/sensors/internal/internal.o core/raspi3-4/protocols/http/http.o main.o
 
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)

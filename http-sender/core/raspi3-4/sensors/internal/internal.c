@@ -18,7 +18,7 @@ char* get_internal()
 {
     s = "";	
 
-    if ((fptr = fopen("/sys/class/thermal/thermal_zone0/temp","r")) == NULL)
+    if ((fptr = fopen("/sys/bus/iio/devices/iio:device0/in_voltage1_raw","r")) == NULL)
 	return "NULL";
     
     fscanf(fptr,"%f", &num);

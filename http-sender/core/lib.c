@@ -25,7 +25,7 @@ void config(struct device *z)
         z->pass_wifi = pass_WiFi;
     #endif
 
-    z->isEnable[0] = isEnable_TemperatureIntern;
+    z->isEnable[0] = isEnable_VoltageIntern;
     z->isEnable[1] = isEnable_TemperatureExtern;
     z->isEnable[2] = isEnable_Humidity;
     z->isEnable[3] = isEnable_Pressure;
@@ -38,7 +38,7 @@ void config(struct device *z)
     z->isEnable[10] = isEnable_Gyroscope_Y;
     z->isEnable[11] = isEnable_Gyroscope_Z;
 
-    z->s_name[0] = "InternalTemperature"; 
+    z->s_name[0] = "InternalVoltage"; 
     z->s_name[1] = "Temperature";
     z->s_name[2] = "Humidity";
     z->s_name[3] = "Pressure";
@@ -67,7 +67,7 @@ void initPeripherals(long* c)
     // init_i2c();
     // init_SPI();
 	
-	// init_internal(true);
+	init_internal(true);
     // init_bme280(true);
     // init_mpu6050(true);
     // init_bh1750(true);
@@ -130,8 +130,8 @@ void getData(struct device *z, long *c)
 
 	
     /* GET DATA INTERNAL TEMPERATURE */
-	strcpy(z->d[0], "0");
-    //strcpy(z->d[0], get_internal());
+	//strcpy(z->d[0], "0");
+    strcpy(z->d[0], get_internal());
 	
     /* GET DATA BME280 */
 	if (1)

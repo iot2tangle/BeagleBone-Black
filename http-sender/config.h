@@ -7,11 +7,11 @@
 const char* id_name = "Raspi-HTTP";
 
 /* HTTP Endpoint Configuration */
-const char* address = "0.0.0.0/sensor_data";  /* Endpoint address, must NOT include 'http://xxx' or 'tcp://xxx' */
+const char* address = "192.168.1.115/sensor_data";  /* Endpoint address, must NOT include 'http://xxx' or 'tcp://xxx' */
 int port = 8080;
 
 /* Enable Sensors */
-bool isEnable_TemperatureIntern = true;
+bool isEnable_VoltageIntern = true;
 bool isEnable_TemperatureExtern = true;	/*                     true: Enable  --  false: Disable                            */
 bool isEnable_Humidity = true;		/* If the sensor is disabled the data about it will not be displayed in the Tangle */
 bool isEnable_Pressure = true;
