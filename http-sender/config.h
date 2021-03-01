@@ -4,7 +4,7 @@
 /* ----- CONFIG FILE ----- */
 
 /* Device */
-const char* id_name = "Raspi-HTTP";
+const char* id_name = "BeagleBoneBW-HTTP";
 
 /* HTTP Endpoint Configuration */
 const char* address = "192.168.1.115/sensor_data";  /* Endpoint address, must NOT include 'http://xxx' or 'tcp://xxx' */

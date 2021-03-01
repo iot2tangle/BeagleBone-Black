@@ -16,7 +16,7 @@ char* s;
 
 void welcome_msg()
 {
-    printf("\n					----  Raspberry Pi 3/4 -- IOT2TANGLE  --");
+    printf("\n					----  BeagleBone Black Wireless -- IOT2TANGLE  --");
     
     #ifdef HTTP	
     	printf("  HTTP  ----\n\n");	// Printf in shell
