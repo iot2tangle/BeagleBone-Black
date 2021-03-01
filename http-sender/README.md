@@ -1,8 +1,8 @@
-# Raspberry PI3/4 with I2T Sensors Stack  --  HTTP Protocol
+# BeagleBone Black Wireless with I2T Sensors Stack  --  HTTP Protocol
 
-The *Raspberry Pi* is a series of small single-board computers developed in the United Kingdom by the *Raspberry Pi Foundation*. Early on, the Raspberry Pi project leaned towards the promotion of teaching basic computer science in schools and in developing countries.
+The *BeagleBone Black Wireless* is a series of small single-board computers developed in the United Kingdom by *beagleboard.org*, an OpenSource community. Early on, the BeagleBone Black Wireless project leaned towards the promotion of teaching basic computer science in schools and in developing countries.
 
-## Setting up your Raspberry with the I2T Sensors Stack
+## Setting up your BeagleBone Black Wireless with the I2T Sensors Stack
 
 The following installation is done on **"Raspberry Pi OS"** (formerly Raspbian) and works for *Raspberry Pi 3* and *Raspberry Pi 4*.
 
