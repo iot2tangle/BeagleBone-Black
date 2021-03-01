@@ -68,10 +68,10 @@ void initPeripherals(long* c)
     // init_SPI();
 	
 	init_internal(true);
-    // init_bme280(true);
-    // init_mpu6050(true);
-    // init_bh1750(true);
-    // init_acoustic(true);
+    init_bme280(true);
+    init_mpu6050(true);
+    init_bh1750(true);
+    init_acoustic(true);
 }
 
 
@@ -111,10 +111,10 @@ void connectNetwork(struct device *z, bool first_t)
 
 void pnp_sensors()
 {
-    // init_bme280(false);
-    // init_mpu6050(false);	
-    // init_bh1750(false);	
-    // init_acoustic(false);
+    init_bme280(false);
+    init_mpu6050(false);	
+    init_bh1750(false);	
+    init_acoustic(false);
 }
 
 
@@ -130,47 +130,38 @@ void getData(struct device *z, long *c)
 
 	
     /* GET DATA INTERNAL TEMPERATURE */
-	//strcpy(z->d[0], "0");
     strcpy(z->d[0], get_internal());
 	
     /* GET DATA BME280 */
-	if (1)
-    //if (check_bme280())
+    if (check_bme280())
     {
-	for (i=0; i<3; i++)
-		strcpy(z->d[i+1], "0");
-   	    //strcpy(z->d[i+1], get_bme280(i));
+		for (i=0; i<3; i++)
+	   	    strcpy(z->d[i+1], get_bme280(i));
     }
     else
     {
-	for (i=0; i<3; i++)
-	    strcpy(z->d[i+1], "0");
+		for (i=0; i<3; i++)
+			strcpy(z->d[i+1], "0");
     }
 
     /* GET DATA ACOUSTIC */
-	if (1)
-    //if (check_acoustic())
-	strcpy(z->d[4], "0");
-	//strcpy(z->d[4], get_acoustic());
+    if (check_acoustic())
+		strcpy(z->d[4], get_acoustic());
     else	
-	strcpy(z->d[4], "0");
+		strcpy(z->d[4], "0");
 
     /* GET DATA LIGHT */
-	if (1)
-    //if (check_bh1750())
-	strcpy(z->d[5], "0");
-	//strcpy(z->d[5], get_bh1750());
+    if (check_bh1750())
+		strcpy(z->d[5], get_bh1750());
     else
-	strcpy(z->d[5], "0");
+		strcpy(z->d[5], "0");
 
 
     /* GET DATA MPU6050 */
-	if (1)
-    //if (check_mpu6050())
+    if (check_mpu6050())
     {
 	for (i=0; i<6; i++)
-		strcpy(z->d[i+6], "0");
-	    //strcpy(z->d[i+6], get_mpu6050(i));
+	    strcpy(z->d[i+6], get_mpu6050(i));
     }
     else
     {
@@ -191,128 +182,123 @@ void generateJson(struct device *z)
     strcat(z->json, "{\"sensor\":\"Internal\",\"data\":[");
     for (i=0;i<1;i++)
     {
-	if (z->isEnable[i+0])
-	{
-	    if (aux != i) strcat(z->json, ",");
-	    strcat(z->json, "{\"");
-	    strcat(z->json, z->s_name[i+0]);
-	    strcat(z->json, "\":\"");
-	    strcat(z->json, z->d[i+0]);
-	    strcat(z->json, "\"}");
-	}
+		if (z->isEnable[i+0])
+		{
+			if (aux != i) strcat(z->json, ",");
+			strcat(z->json, "{\"");
+			strcat(z->json, z->s_name[i+0]);
+			strcat(z->json, "\":\"");
+			strcat(z->json, z->d[i+0]);
+			strcat(z->json, "\"}");
+		}
 	else
 	    aux++;
     }
     strcat(z->json, "]}");
 	
-	if (1)
-    //if (check_bme280())
+    if (check_bme280())
     {
-	aux = 0;
-	strcat(z->json, ",{\"sensor\":\"Environmental\",\"data\":[");
-	for (i=0;i<3;i++)
-	{
-	    if (z->isEnable[i+1])
-	    {
-		if (aux != i) strcat(z->json, ",");
-		strcat(z->json, "{\"");
-		strcat(z->json, z->s_name[i+1]);
-		strcat(z->json, "\":\"");
-		strcat(z->json, z->d[i+1]);
-		strcat(z->json, "\"}");
-	    }
-	    else
-		aux++;
-	}
-	strcat(z->json, "]}");
+		aux = 0;
+		strcat(z->json, ",{\"sensor\":\"Environmental\",\"data\":[");
+		for (i=0;i<3;i++)
+		{
+			if (z->isEnable[i+1])
+			{
+				if (aux != i) strcat(z->json, ",");
+				strcat(z->json, "{\"");
+				strcat(z->json, z->s_name[i+1]);
+				strcat(z->json, "\":\"");
+				strcat(z->json, z->d[i+1]);
+				strcat(z->json, "\"}");
+			}
+			else
+			aux++;
+		}
+		strcat(z->json, "]}");
     }
 	
-    if (1)
-    //if (check_acoustic())
+    if (check_acoustic())
     {
-	aux = 0;
-	strcat(z->json, ",{\"sensor\":\"Acoustic\",\"data\":[");
-	for (i=0;i<1;i++)
-	{
-	    if (z->isEnable[i+4])
-	    {
-		if (aux != i) strcat(z->json, ",");
-		strcat(z->json, "{\"");
-		strcat(z->json, z->s_name[i+4]);
-		strcat(z->json, "\":\"");
-		strcat(z->json, z->d[i+4]);
-		strcat(z->json, "\"}");
-	    }
-	    else
-		aux++;
-	}
+		aux = 0;
+		strcat(z->json, ",{\"sensor\":\"Acoustic\",\"data\":[");
+		for (i=0;i<1;i++)
+		{
+			if (z->isEnable[i+4])
+			{
+			if (aux != i) strcat(z->json, ",");
+			strcat(z->json, "{\"");
+			strcat(z->json, z->s_name[i+4]);
+			strcat(z->json, "\":\"");
+			strcat(z->json, z->d[i+4]);
+			strcat(z->json, "\"}");
+			}
+			else
+			aux++;
+		}
 	strcat(z->json, "]}");
     }
-    
-    if (1)
-    //if (check_bh1750())
+  
+    if (check_bh1750())
     {
-	aux = 0;
-	strcat(z->json, ",{\"sensor\":\"Light\",\"data\":[");
-	for (i=0;i<1;i++)
-	{
-	    if (z->isEnable[i+5])
-	    {
-		if (aux != i) strcat(z->json, ",");
-		strcat(z->json, "{\"");
-		strcat(z->json, z->s_name[i+5]);
-		strcat(z->json, "\":\"");
-		strcat(z->json, z->d[i+5]);
-		strcat(z->json, "\"}");
-	    }
-	    else
-		aux++;
-	}
-	strcat(z->json, "]}");
-    }
-	 
-    if (1)
-    //if (check_mpu6050())
+		aux = 0;
+		strcat(z->json, ",{\"sensor\":\"Light\",\"data\":[");
+		for (i=0;i<1;i++)
+		{
+			if (z->isEnable[i+5])
+			{
+			if (aux != i) strcat(z->json, ",");
+			strcat(z->json, "{\"");
+			strcat(z->json, z->s_name[i+5]);
+			strcat(z->json, "\":\"");
+			strcat(z->json, z->d[i+5]);
+			strcat(z->json, "\"}");
+			}
+			else
+			aux++;
+		}
+		strcat(z->json, "]}");
+    } 
+
+    if (check_mpu6050())
     {
-	aux = 0;
-	strcat(z->json, ",{\"sensor\":\"Acelerometer\",\"data\":[");
-	for (i=0;i<3;i++)
-	{
-	    if (z->isEnable[i+6])
-	    {
-		if (aux != i) strcat(z->json, ",");
-		strcat(z->json, "{\"");
-		strcat(z->json, z->s_name[i+6]);
-		strcat(z->json, "\":\"");
-		strcat(z->json, z->d[i+6]);
-		strcat(z->json, "\"}");
-	    }
-	    else
-		aux++;
-	}
-	strcat(z->json, "]}");
+		aux = 0;
+		strcat(z->json, ",{\"sensor\":\"Acelerometer\",\"data\":[");
+		for (i=0;i<3;i++)
+		{
+			if (z->isEnable[i+6])
+			{
+			if (aux != i) strcat(z->json, ",");
+			strcat(z->json, "{\"");
+			strcat(z->json, z->s_name[i+6]);
+			strcat(z->json, "\":\"");
+			strcat(z->json, z->d[i+6]);
+			strcat(z->json, "\"}");
+			}
+			else
+			aux++;
+		}
+		strcat(z->json, "]}");
     }
 
-    if (1)
-    //if (check_mpu6050())
+    if (check_mpu6050())
     {
-	aux = 0;
-	strcat(z->json, ",{\"sensor\":\"Gyroscope\",\"data\":[");
-	for (i=0;i<3;i++)
-	{
-	    if (z->isEnable[i+9])
-	    {
-		if (aux != i) strcat(z->json, ",");
-		strcat(z->json, "{\"");
-		strcat(z->json, z->s_name[i+9]);
-		strcat(z->json, "\":\"");
-		strcat(z->json, z->d[i+9]);
-		strcat(z->json, "\"}");
-	    }
-	    else
-		aux++;
-	}
-	strcat(z->json, "]}");
+		aux = 0;
+		strcat(z->json, ",{\"sensor\":\"Gyroscope\",\"data\":[");
+		for (i=0;i<3;i++)
+		{
+			if (z->isEnable[i+9])
+			{
+			if (aux != i) strcat(z->json, ",");
+			strcat(z->json, "{\"");
+			strcat(z->json, z->s_name[i+9]);
+			strcat(z->json, "\":\"");
+			strcat(z->json, z->d[i+9]);
+			strcat(z->json, "\"}");
+			}
+			else
+			aux++;
+		}
+		strcat(z->json, "]}");
     }	 
 	strcat(z->json, "],\"device\": \"");
 	strcat(z->json, z->id);

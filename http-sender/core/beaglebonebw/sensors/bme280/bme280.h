@@ -1,11 +1,21 @@
 #ifndef __BME280_H__
 #define __BME280_H__
 
+#include <stdio.h>
 #include <errno.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <stdbool.h>
 
-#define BME280_ADDRESS                0x76
+#define TICK_DELAY 10
+
+#define I2C_PORT_NUMBER 1
+
+#define BME280_SENSOR_ADDR  0x76	/*Device Address/Identifier */
+#define WRITE_BIT 			I2C_MASTER_WRITE              /*!< I2C master write */
+#define READ_BIT 			I2C_MASTER_READ                /*!< I2C master read */
+#define ACK_CHECK_EN 		0x1                        /*!< I2C master will check ack from slave*/
+
 
 #define BME280_REGISTER_DIG_T1        0x88
 #define BME280_REGISTER_DIG_T2        0x8A
@@ -39,65 +49,9 @@
 
 #define MEAN_SEA_LEVEL_PRESSURE       1013
 
-/*
-* Immutable calibration data read from bme280
-*/
-typedef struct
-{
-  uint16_t dig_T1;
-  int16_t  dig_T2;
-  int16_t  dig_T3;
-
-  uint16_t dig_P1;
-  int16_t  dig_P2;
-  int16_t  dig_P3;
-  int16_t  dig_P4;
-  int16_t  dig_P5;
-  int16_t  dig_P6;
-  int16_t  dig_P7;
-  int16_t  dig_P8;
-  int16_t  dig_P9;
-
-  uint8_t  dig_H1;
-  int16_t  dig_H2;
-  uint8_t  dig_H3;
-  int16_t  dig_H4;
-  int16_t  dig_H5;
-  int8_t   dig_H6;
-} bme280_calib_data;
-
-/*
-* Raw sensor measurement data from bme280
-*/
-typedef struct 
-{
-  uint8_t pmsb;
-  uint8_t plsb;
-  uint8_t pxsb;
-
-  uint8_t tmsb;
-  uint8_t tlsb;
-  uint8_t txsb;
-
-  uint8_t hmsb;
-  uint8_t hlsb;
-
-  uint32_t temperature;
-  uint32_t pressure;
-  uint32_t humidity;  
-
-} bme280_raw_data;
-
 void init_bme280(bool);
 bool check_bme280(void);
 char* get_bme280(int ind);
 void print_bme280(void);
-void readCalibrationData(int fd, bme280_calib_data *cal);
-int32_t getTemperatureCalibration(bme280_calib_data *cal, int32_t adc_T);
-float compensateTemperature(int32_t t_fine);
-float compensatePressure(int32_t adc_P, bme280_calib_data *cal, int32_t t_fine);
-float compensateHumidity(int32_t adc_H, bme280_calib_data *cal, int32_t t_fine);
-void getRawData(int fd, bme280_raw_data *raw);
-float getAltitude(float pressure);
 
 #endif
