@@ -12,9 +12,16 @@ This is the list of Sensors/Modules that you can connect and it will be recogniz
 - ***BME280*** (*Bosch*) - Temperature, Humidity and Pressure sensor. -> Connected by *I2C Bus* via: *PIN20/SDA* and *PIN19/SCL* (*/dev/i2c-2*) --- Be careful with the supply of this sensor, the BM280 is powered with 3.3V, if your module does not have a voltage regulator (some modules do not have it) the sensor can be damaged if you supply 5V.
 - ***MPU6050*** (*InvenSense-TDK*) - Acelerometer and Gyroscope 6-axis. -> Connected by *I2C Bus* via: *PIN20/SDA* and *PIN19/SCL* (*/dev/i2c-2*).
 - ***BH1750*** (*ROHM*) - Ambient Light Sensor. -> Connected by *I2C Bus* via: *PIN20/SDA* and *PIN19/SCL* (*/dev/i2c-2*).
-- ***Generic Adjustable Sound Sensor with digital output*** (like *KY038 Module*) - -> Digital Signal on *GPIO67* (*PIN8*), GND in *GPIO66* (*PIN7*) (to enable data collection).
+- ***Generic Adjustable Sound Sensor with digital output*** (like *KY038 Module*) - -> Digital Signal on *GPIO66* (*PIN7*), and *GPIO67* (*PIN8*) to GND (to enable data collection).
 - Also, you can connect a ***Green LED*** in *GPIO60* (*PIN12*) that blink when the data is sent to the Tangle, and a ***Red LED*** in *GPIO48* (*PIN15*) that will Blink in a certain way when it detects certain errors (totally optional).
 
+### Connecting the sensors
+
+The following diagram explains how each sensor of our stack must be connected to the BeagleBone pins:
+
+![I2T Sensors Stack on BeagleBone](https://iot2tangle.io/assets/screenshots/BeagleBoneBlack_diagram.png)
+
+**It is not necessary to have all the sensors listed here**, the code is able to detect which sensors were connected. In the case of not connecting any sensor, the only real data that will be displayed on the Tangle will be the Internal Voltage of *BeagleBone Black / Wireless*.
 
 ## Setting up the Sensors Software
 
