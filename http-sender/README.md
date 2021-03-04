@@ -39,8 +39,8 @@ bash install.sh
 #### 2) Copy the repository to the local file system of your Raspberry.
 ```
 cd ~
-git clone https://github.com/iot2tangle/BeagleBone-black-wireless.git
-cd BeagleBone-black-wireless/http-sender
+git clone https://github.com/iot2tangle/BeagleBone-Black.git
+cd BeagleBone-Black/http-sender
 ```
 #### 3) Edit the file config.h
 
@@ -49,7 +49,7 @@ Edit the **config.h** file to define the values for your configuration: The *end
 Keep in mind that any changes on the config file will require to recompile the code.
 
 ```
-const char* id_name = "BeagleBoneBW-HTTP";
+const char* id_name = "BeagleBoneB-HTTP";
 
 /* Endpoint Configuration */
 const char* endpoint = "192.168.1.113/sensor_data";    /* Endpoint (HTTP), must NOT include 'http://xxx' or 'tcp://xxx' */
