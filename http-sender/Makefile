@@ -6,7 +6,7 @@ OBJ = core/beaglebonebw/basics.o core/beaglebonebw/peripherals/gpio/simpleBBB_GP
 %.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-BeagleboneBW-HTTP: $(OBJ)
+BeagleboneB-HTTP: $(OBJ)
 	@echo "\nCompiling..."
 	$(CC) -o $@ $^ $(CFLAGS) 
 	@echo "\nCompiled Finished, now you can run your code with: '$ ./BeagleboneBW-HTTP'\n"
