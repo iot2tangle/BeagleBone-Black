@@ -19,3 +19,4 @@ This is the list of Sensors/Modules that you can connect and it will be recogniz
 
 ## Available connectivity
 - **[HTTP-sender](https://github.com/iot2tangle/BeagleBone-black-wireless/tree/main/http-sender)** (*BeagleBone Black* and *BeagleBone Black  Wireless* will send the sensors data through HTTP to **[I2T HTTP Gateway](https://github.com/iot2tangle/Streams-http-gateway)** or **[Keepy](https://github.com/iot2tangle/Keepy)**
+- **[MQTT-sender](https://github.com/iot2tangle/BeagleBone-black-wireless/tree/main/mqtt-sender)** (*BeagleBone Black* and *BeagleBone Black  Wireless* will send the sensors data through MQTT to **[I2T MQTT Gateway](https://github.com/iot2tangle/Streams-mqtt-gateway)**
