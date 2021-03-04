@@ -78,13 +78,13 @@ make
 ```
 #### 5) Run:
 ```
-./BeagleboneBW-HTTP
+./BeagleboneB-HTTP
 ```
 
 
 If the *I2T Streams HTTP Gateway* is configured correctly (we will explain this next), ***you will be sending data to Tangle via Streams***. 
 
-The following capture shows a *BeagleboneBW* with a *BME280* connected (note how the sensor is detected automatically):
+The following capture shows a *BeagleboneB* with a *BME280* connected (note how the sensor is detected automatically):
 
 ![Raspberry with BME280 sending data to the Tangle](https://i.postimg.cc/cH6TWpXP/Screenshot-from-2020-10-16-11-33-05.png)
 
