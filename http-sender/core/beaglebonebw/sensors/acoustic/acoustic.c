@@ -7,8 +7,8 @@
 #include <simpleBBB_GPIO.h>
 #include "acoustic.h"
 
-#define ACOUSTIC_ENABLE 66	// GPIO66 BBB
-#define ACOUSTIC_DATA 67	// GPIO67 BBB
+#define ACOUSTIC_ENABLE 67	// GPIO67 BBB
+#define ACOUSTIC_DATA 66	// GPIO66 BBB
 
 char buffer[100];
 char* s;
