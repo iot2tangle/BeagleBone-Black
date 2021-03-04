@@ -1,19 +1,9 @@
 #ifndef _MPU6050_H_
 #define _MPU6050_H_
 
-#include <stdio.h>
-#include <errno.h>
-#include <stdint.h>
-#include <stdlib.h>
+#include <stdbool.h>
 
-#define TICK_DELAY 10
-
-#define I2C_PORT_NUMBER 1
-
-#define MPU6050_SENSOR_ADDR	0x68	/*Device Address/Identifier for MPU6050*/
-#define WRITE_BIT 			I2C_MASTER_WRITE              /*!< I2C master write */
-#define READ_BIT 			I2C_MASTER_READ                /*!< I2C master read */
-#define ACK_CHECK_EN 		0x1                        /*!< I2C master will check ack from slave*/
+#define Device_Address 0x68	/*Device Address/Identifier for MPU6050*/
 
 #define PWR_MGMT_1   0x6B
 #define SMPLRT_DIV   0x19
@@ -29,6 +19,7 @@
 #define MPU_ID       0x75
 
 bool check_mpu6050(void);
+short read_raw_data(int);
 void init_mpu6050(bool);
 void print_mpu6050(void);
 char* get_mpu6050(int);

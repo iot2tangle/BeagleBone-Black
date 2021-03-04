@@ -35,13 +35,13 @@ void d_collect_msg(long* n)
 void print_sensors_state()
 {
 	printf ("   Sensors Detection:  ||	");
-	//print_bme280();
+	print_bme280();
 	printf("	||	");
-	//print_mpu6050();
+	print_mpu6050();
 	printf("	||	");
-	//print_bh1750();
+	print_bh1750();
 	printf("	||	");
-	//print_acoustic();
+	print_acoustic();
 	printf ("	||\n");
 }
 

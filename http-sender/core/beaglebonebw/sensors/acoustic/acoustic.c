@@ -4,27 +4,31 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <unistd.h>
+#include <simpleBBB_GPIO.h>
 #include "acoustic.h"
 
-
-#define ACOUSTIC_ENABLE 22	// GPIO 23
-#define ACOUSTIC_DATA 21 // GPIO 22
+#define ACOUSTIC_ENABLE 66	// GPIO66 BBB
+#define ACOUSTIC_DATA 67	// GPIO67 BBB
 
 char buffer[100];
 char* s;
 
 bool check_acoustic()
 {
-	#ifdef TEST
+    if (!simpleBBB_GPIOread(ACOUSTIC_ENABLE))
 		return true;
-	#endif
-    return false;	
+    else
+		return false;
 }
 
 void init_acoustic(bool ft)
 {
-	;
-} 
+	if (ft)
+	{
+		simpleBBB_GPIOset(ACOUSTIC_ENABLE, 1);
+		simpleBBB_GPIOset(ACOUSTIC_DATA, 1);
+	}
+}
 
 void print_acoustic()
 {
@@ -36,11 +40,15 @@ void print_acoustic()
 
 char* get_acoustic()
 {
-    #ifdef TEST
-		return "High";
-	#endif
+    s = " ";
 
-    return "Low";
+    if (simpleBBB_GPIOread(ACOUSTIC_DATA))
+		sprintf(buffer, "High");
+    else
+		sprintf(buffer, "Low");
+
+    s=buffer;
+    return s;
 }
 
 

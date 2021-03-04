@@ -63,9 +63,8 @@ void initPeripherals(long* c)
     	welcome_msg();	// Printf in shell
     #endif
 	
-    // init_LEDs();
-    // init_i2c();
-    // init_SPI();
+    init_LEDs();
+    // init_i2c(); // Not necesary in BBB
 	
 	init_internal(true);
     init_bme280(true);
@@ -77,14 +76,14 @@ void initPeripherals(long* c)
 
 void led_blinks(int led, int iter, int usec)	// LED Blink function-> led: 0 Green LED, 1 Red LED - iter: iterations quantity - usec: delay time in usec
 {	
-    // int i;
-    // for (i=0;i<iter;i++)
-    // {
-	// led_GPIO(led, 1);
-	// udelay_basics (usec);
-	// led_GPIO(led, 0);
-	// udelay_basics (usec);
-    // }
+     int i;
+     for (i=0;i<iter;i++)
+     {
+		 led_GPIO(led, 1);
+		 udelay_basics (usec);
+		 led_GPIO(led, 0);
+		 udelay_basics (usec);
+     }
 }
 
 void connectNetwork(struct device *z, bool first_t)
@@ -94,15 +93,15 @@ void connectNetwork(struct device *z, bool first_t)
 	{				
 		while ( !connectAttempt(z->ssid_wifi, z->pass_wifi) )    /* Attempt to connect to the network via WiFi, in RaspberryPi only check connection to the network. */
 		{
-			// led_blinks(0, 1, 600000);	// Blink in green GREEN - ERROR 0 (No WiFi connection);
-			// led_blinks(1, 1, 600000);	// Blink in green RED - ERROR 0 (No WiFi connection);
+			 led_blinks(0, 1, 600000);	// Blink in green GREEN - ERROR 0 (No WiFi connection);
+			 led_blinks(1, 1, 600000);	// Blink in green RED - ERROR 0 (No WiFi connection);
 		}
 	}
 	#endif
 	if ( !init_socket(z->addr, z->addr_port, z->user_mqtt, z->pass_mqtt, first_t) )     /* Check Endpoint */
 	{	
 		udelay_basics ( 100000 );
-		//led_blinks(1, 3, 70000);	// Blink in green RED - ERROR 1 (Bad connection with the endpoint);
+		led_blinks(1, 3, 70000);	// Blink in green RED - ERROR 1 (Bad connection with the endpoint);
 		#ifdef MICROCONTROLLER
 			restart_basic();
 		#endif
@@ -312,11 +311,11 @@ void generateJson(struct device *z)
 bool sendtoEndpoint(struct device *z)
 {
     bool b_socket = socket_sender(z->addr, z->addr_port, z->top, z->user_mqtt, z->pass_mqtt, z->json, z->interv);
-    // if (b_socket)
-	// 	led_blinks(0, 2, 60000);	// Blink in green LED;
-    // else
-	// 	led_blinks(1, 3, 70000);	// Blink in green RED - ERROR 1 (Bad connection with the endpoint);
-	
+    if (b_socket)
+	 	led_blinks(0, 2, 60000);	// Blink in green LED;
+    else
+		led_blinks(1, 3, 70000);	// Blink in green RED - ERROR 1 (Bad connection with the endpoint);
+
     return b_socket;
 }
 
